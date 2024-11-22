@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Ventas</title>
+</head>
+<body>
+
+    <header>
+        <div id="navbar-configuracion" class="navbar-configuracion"></div>
+    </header>
+
+    <div class="titulo">
+        <h2> Grafica de ventas</h2>
+    </div>
+<!-- Navbar -->
+<!-- <nav style="margin: 100px;" class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Admin Restaurante</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Órdenes</a>
+                </li>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="admin.html">Volver</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav> -->
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    Gráfico de Ventas del Día
+                </div>
+                <div class="card-body">
+                    <canvas id="salesChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Sección de scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+
+    
+    // Configuración del gráfico de ventas
+    const ctx = document.getElementById('salesChart').getContext('2d');
+    const salesChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['8 AM', '10 AM', '12 PM', '2 PM', '4 PM', '6 PM', '8 PM'],
+            datasets: [{
+                label: 'Ventas ($)',
+                data: [300, 500, 1000, 1200, 1500, 1800, 2200],
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    // Navbar de configuracion
+    fetch('/NavbarConfiguracion')
+           .then(response => response.text())
+           .then(data => {
+               // Insertar el HTML en el contenedor
+               document.getElementById('navbar-configuracion').innerHTML = data;
+               document.getElementById("titulo").innerHTML = "Grafica de ventas";
+
+               // Crear un script para ejecutar el contenido JS de Producto.js
+               const script = document.createElement('script');
+               script.onload = () => {
+                   console.log('El script se cargó y ejecutó correctamente');
+               };
+               document.body.appendChild(script);
+           })
+           .catch(error => console.error('Error al cargar el navbar:', error));
+</script>
+</body>
+</html>

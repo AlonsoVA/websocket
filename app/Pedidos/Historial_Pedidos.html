@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QRService</title>
+    <link rel="stylesheet" href="/historyOrders.css">
+    <script src="https://kit.fontawesome.com/dc58fd35be.js" crossorigin="anonymous"></script>
+    <script src="/historyOrders.js"></script>
+</head>
+<body>
+    <header>
+        <div id="navbar-configuracion" class="navbar-configuracion"></div>
+    </header>
+
+    <div class="titulo">
+        <h2> Historial Pedidos Completados</h2>
+    </div>
+
+    <div id="finishedOrders"></div>
+
+</body>
+<script>
+    fetch('/NavbarConfiguracion')
+           .then(response => response.text())
+           .then(data => {
+               // Insertar el HTML en el contenedor
+               document.getElementById('navbar-configuracion').innerHTML = data;
+               document.getElementById("titulo").innerHTML = "Historial Pedidos Completados";
+           })
+           .catch(error => console.error('Error al cargar el navbar:', error));
+
+           
+   </script>
+</html>

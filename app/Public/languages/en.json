@@ -1,0 +1,16 @@
+{
+    "Login": {
+        "create": "Create Account",
+        "hi":"Hi!",
+        "registration": "Register",
+        "start": "Start",
+        "password": "Forgot your password?",
+        "welcome": "Welcome!",
+        "data": "Enter your details to log in",
+        "income": "Log In",
+        "registration_data": "Register your details to access the system",
+        "name": "Name",
+        "pass": "Password",
+        "email": "Email"
+    }
+}

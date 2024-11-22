@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="icon" href="Img-prodcut.png" type="image/png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Postres</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/Menu.css">
+</head>
+<body>
+
+<header>
+    <h1>---- Postres ----</h1>
+    <a href="/Menu"><h1>The Menu</h1></a>
+</header>
+
+<!-- Navbar -->
+<div id="navbar-container"></div>
+
+<!-- Menu -->
+<div class="menu-container" id="menu-container"></div>
+
+<div class="notis"><button class="abrir_notis" id="abrir-notis"><i class="bi bi-chat-dots"></i></button></div>
+    <div class="notificaciones" id="notificaciones">
+    <button class="cerrar-notis" id="cerrar-notis"><i class="bi bi-x-square"></i></button>
+    <button class="call-mesero" data-seccion="header" data-valor="Request waiter">Llamar mesero</button>
+    <button class="call-account" data-seccion="header" data-valor="Request Account">Solicitar cuenta</button>
+</div>
+
+<!-- Ventana Modal de productos del carrito -->
+<div id="cartModal" class="modal">
+    <div class="modal-content">
+        <button class="close-btn" id="close-modal">Cerrar</button>
+        <h2>Carrito de Compras</h2>
+        <div id="productos-modal"></div>
+        <div id="total-modal"></div>
+        <button id="vaciar-carrito">Vaciar Carrito</button>
+        <button id="enviar-carrito">Enviar Pedido</button>
+    </div>
+</div>
+
+<script>
+    // Realiza la solicitud a la API para obtener los productos
+    fetch('/PostresP')
+        .then(response => response.json())
+        .then(data => {
+            const menuContainer = document.getElementById("menu-container");
+
+            data.forEach(postres => {
+                const productoDiv = document.createElement('div');
+                productoDiv.classList.add('producto');
+
+                const productoImg = document.createElement('img');
+                productoImg.src = `../postres.img/${postres.img}`;
+                productoImg.alt = postres.nombre_producto;
+
+                const nombreP = document.createElement('div');
+                nombreP.classList.add('nombreP');
+                nombreP.textContent = postres.nombre_producto;
+
+                const descripcionP = document.createElement('p');
+                descripcionP.classList.add('descripcion');
+                descripcionP.textContent = postres.descripcion;
+
+                const precioP = document.createElement('div');
+                precioP.classList.add('precio');
+                precioP.textContent = `$${postres.precio_producto}`;
+
+                const botones = document.createElement('div');
+                botones.classList.add('botones');
+
+                const button_del = document.createElement('button');
+                button_del.classList.add('button_del');
+                button_del.textContent = "-";
+
+                const button_sum = document.createElement('button');
+                button_sum.classList.add('button_add');
+                button_sum.textContent = "+";
+
+                const input_cant = document.createElement('input');
+                input_cant.type = 'number';
+                input_cant.classList.add('input_cant');
+                input_cant.value = 0;
+
+                button_sum.addEventListener('click', () => {
+                    input_cant.value = parseInt(input_cant.value) + 1;
+                    agregarAlCarrito(postres);
+                });
+
+                button_del.addEventListener('click', () => {
+                    if(input_cant.value > 0){
+                        input_cant.value = parseInt(input_cant.value) - 1;
+                        eliminarCantCarrito(postres);
+                    }  
+                });
+
+                productoDiv.appendChild(productoImg);
+                productoDiv.appendChild(nombreP);
+                nombreP.appendChild(descripcionP);
+                productoDiv.appendChild(precioP);
+                botones.appendChild(button_del);
+                botones.appendChild(input_cant);
+                botones.appendChild(button_sum);
+                productoDiv.appendChild(botones);
+                menuContainer.appendChild(productoDiv);
+            });
+        })
+        .catch(error => {
+            console.error('Error al cargar los productos:', error);
+        });
+
+        fetch('/Navbar')
+            .then(response => response.text())
+            .then(data => {
+                // Insertar el HTML en el contenedor
+                document.getElementById('navbar-container').innerHTML = data;
+
+                // Crear un script para ejecutar el contenido JS de JMenu.js
+                const script = document.createElement('script');
+                script.src = '/JMenu.js';  // Ruta del script
+                script.onload = () => {
+                    console.log('El script se cargó y ejecutó correctamente');
+                };
+                document.body.appendChild(script);
+            })
+            .catch(error => console.error('Error al cargar el navbar:', error));
+
+            const carrito = [];
+
+            function agregarAlCarrito(producto) {
+                const productoExistente = carrito.find(item => item.nombre_producto === producto.nombre_producto);
+
+                if (productoExistente) {
+                    productoExistente.cantidad++;
+                } else {
+                    carrito.push({ ...producto, cantidad: 1 });
+                }
+
+                mostrarCarrito();
+            }
+
+            function eliminarDelCarrito(producto) {
+                const index = carrito.findIndex(item => item.nombre_producto === producto.nombre_producto);
+                if (index !== -1) {
+                    carrito.splice(index, 1);
+                }
+                mostrarCarrito();
+            }
+
+            function eliminarCantCarrito(producto) {
+            const productoExistente = carrito.find(item => item.nombre_producto === producto.nombre_producto);
+
+            if (productoExistente && productoExistente.cantidad > 0) {
+                productoExistente.cantidad--;
+            } else {
+                carrito.push({ ...producto, cantidad: 0 });
+            }
+            if (productoExistente && productoExistente.cantidad == 0) {
+                eliminarDelCarrito(producto);
+            } 
+            mostrarCarrito();
+            }
+
+            function eliminarDelCarrito(producto) {
+                const index = carrito.findIndex(item => item.nombre_producto === producto.nombre_producto);
+                if (index !== -1) {
+                    carrito.splice(index, 1);
+                }
+                mostrarCarrito();
+            }
+
+
+            function mostrarCarrito() {
+                const productosModal = document.getElementById("productos-modal");
+                const totalModal = document.getElementById("total-modal");
+                productosModal.innerHTML = '';
+                let total = 0;
+
+                carrito.forEach(producto => {
+                    const itemDiv = document.createElement('div');
+                    itemDiv.classList.add('carrito-item');
+                    itemDiv.textContent = `${producto.nombre_producto} x${producto.cantidad} - $${producto.precio_producto * producto.cantidad}`;
+                    productosModal.appendChild(itemDiv);
+                    total += producto.precio_producto * producto.cantidad;
+                });
+
+                totalModal.textContent = `Total: $${total.toFixed(2)}`;
+            }
+</script>
+</body>
+</html>

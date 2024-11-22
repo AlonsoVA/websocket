@@ -1,0 +1,24 @@
+{
+  "name": "inte-qrservice",
+  "version": "1.0.0",
+  "description": "Este es el repositorio en el cual vamos a trabajar.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node --watch app/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "express": "4.21.1",
+    "inte-qrservice": "file:",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "mysql2": "^3.11.3",
+    "ws": "^8.18.0"
+  }
+}

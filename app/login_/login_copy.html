@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="login.css">
+    <title>Login</title>
+
+
+
+    
+</head>
+
+<body class="loading">
+    <div class="language-buttons">
+        <button data-language="es">Español</button>
+        <button data-language="en">English</button>
+    </div>
+
+   
+
+
+
+    <div class="container" id="container">
+        <div class="form-container sign-up">
+            <form>
+                <h3 >QUICK RESTAURANT</h3>
+                <h1 data-section="Login" data-value="create">Crear Cuenta</h1>
+                <!-- Nombre requerido y mínimo de 3 caracteres -->
+                <input type="text" placeholder="Nombre" required minlength="3">
+                <!-- Contraseña requerida y con mínimo de 6 caracteres -->
+                <input type="password" placeholder="Contraseña" required minlength="4">
+                <button type="submit" data-section="Login" data-value="registration" >Registrar</button>
+            </form>
+        </div>
+        <div class="form-container sign-in">
+            <form>
+                <h3>QUICK RESTAURANT</h3>
+                <h1 data-section="Login" data-value="start">Inicia</h1>
+                <!-- Correo electrónico con formato requerido -->
+                <input type="email" placeholder="Correo" required>
+                <!-- Contraseña requerida -->
+                <input type="password" placeholder="Contraseña" required minlength="6">
+                <a href="#" id="forgot-password" data-section="Login" data-value="password" >Olvidaste tu contraseña?</a>
+                <button type="submit" data-section="Login" data-value="start">Iniciar</button>
+            </form>
+        </div>
+        <div class="toggle-container">
+            <div class="toggle">
+                <div class="toggle-panel toggle-left">
+                    <h1 data-section="Login" data-value="welcome">Bienvenido!</h1>
+                    <p data-section="Login" data-value="data">Inserta tus datos para Iniciar</p>
+                    <button class="hidden" id="login" data-section="Login" data-value="income">Ingresar</button>
+                </div>
+                <div class="toggle-panel toggle-right">
+                    <h1 data-section="Login" data-value="hi">Hola!</h1>
+                    <p data-section="Login" data-value="registration_data">Registra tus datos para accesar al sistema</p>
+                    <button class="hidden" id="register" data-section="Login" data-value="registration">Registro</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="login.js"></script>
+    <script src="cookies.js"></script>
+</body>
+
+</html>

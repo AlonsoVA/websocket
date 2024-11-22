@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="icon" href="Img-prodcut.png" type="image/png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/Menu.css">
+</head>
+<body>
+
+<header >
+    <a href="/Menu"><h1>Menu</h1></a>
+</header>
+
+<div class="notis">
+    <button class="abrir_notis" id="abrir-notis">
+        <i class="fa-solid fa-phone"></i>
+    </button>
+</div>
+
+<div class="notificaciones" id="notificaciones">
+    <button class="cerrar-notis" id="cerrar-notis"><i class="bi bi-x-square"></i></button>
+    <button class="call-mesero" data-seccion="header" data-valor="Request waiter">Llamar mesero</button>
+    <button class="call-account" data-seccion="header" data-valor="Request Account">Solicitar cuenta</button>
+</div>
+
+<div id="navbar-container"></div>
+
+<div class="productos_titulo" id="LinkBebidas" > <i class="fa-solid fa-whiskey-glass"></i> Bebidas </div>
+<div class="menu-container" id="menu-containerBebidas"></div>
+
+    <div class="productos_titulo" id="LinkEntradas"><i class="fa-solid fa-utensils"></i> Entradas</div>
+<div class="menu-container" id="menu-containerEntradas"></div>
+
+    <div class="productos_titulo" id="linkPlatillos"><i class="fa-solid fa-pizza-slice"></i> Platillos </div>
+<div class="menu-container" id="menu-containerPlatillos"></div>
+
+    <div class="productos_titulo" id="linkPostres"><i class="fa-solid fa-ice-cream"></i> Postres</div>
+<div class="menu-container" id="menu-containerPostres"></div>
+
+<!-- Ventana Modal de productos del carrito -->
+<div id="cartModal" class="modal">
+    <div class="modal-content">
+        <button class="close-btn" id="close-modal">Cerrar</button>
+        <h2>Carrito de Compras</h2>
+        <div id="productos-modal"></div>
+        <div id="total-modal"></div>
+        <button id="vaciar-carrito">Vaciar Carrito</button>
+        <button id="enviar-carrito">Enviar Pedido</button>
+    </div>
+</div>
+
+<script src="menuProduct.js"></script>
+</body>
+</html>
