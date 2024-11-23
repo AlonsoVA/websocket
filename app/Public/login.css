@@ -257,5 +257,28 @@ body {
     transform: translateX(200%);
 }
 
+.language-buttons {
+    display: flex;
+    gap: 10px;
+}
 
+.language-buttons button {
+    background-color: gold;
+    color: black;
+    border: none;
+    padding: 8px 16px; /* Ajustado para un tamaño más proporcionado */
+    font-size: 14px; /* Letras más pequeñas */
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
 
+.language-buttons button:hover {
+    background-color: darkgoldenrod;
+    transform: scale(1.05);
+}
+
+.language-buttons button:active {
+    transform: scale(0.95);
+}

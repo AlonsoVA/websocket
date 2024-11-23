@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <link rel="icon" href="Img-prodcut.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <style>
+        .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      .b-example-divider {
+        width: 100%;
+        height: 3rem;
+        background-color: rgba(0, 0, 0, .1); 
+        border: solid rgba(0, 0, 0, .15);
+        border-width: 1px 0;
+        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+      } 
+
+      .b-example-vr {
+        flex-shrink: 0;
+        width: 1.5rem;
+        height: 100vh;
+      }
+
+      .logo{
+        height: 40px;
+        width: 40px;
+        margin: 5px;
+      }
+
+      .configuracion {
+      display: none;
+      position: absolute;
+      list-style: none;
+      padding-left: 0;
+      margin-top: 10px;
+      animation: slideDown 0.3s ease-out forwards;
+    }
+
+    .nav-link {
+      cursor: pointer;
+    }
+
+    @keyframes slideDown {
+      0% {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .configuracion .nav-item {
+      margin-bottom: 5px;
+    }
+
+    header {
+    background-color: rgb(29, 28, 28); 
+    color:#f8d653;
+  }
+
+  .nav-link {
+    color: #f8d653;
+  }
+
+  .nav-link:hover {
+    color: white;
+  }
+
+
+  .nav-item{
+    margin: 2px;
+  }
+    </style>
+</head>
+<body>    
+      <div class="container">
+        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+          <a id="d-flex" href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+            <img class="logo" src="img-prodcut.png" alt="">
+            <span class="fs-4" style="color: #f8d653;">QuickRestaurant</span>
+          </a>
+    
+          <ul class="nav nav-pills">
+            <li class="nav-item"><a href="/Comandas" class="nav-link active" style="color:#f8d653; background-color: #101010;" aria-current="page">Comandas</a></li>
+            <li class="nav-item"><a href="/pedidos-completados" class="nav-link" style="color:#f8d653; " >Historial</a></li>
+            <nav>
+              <li class="nav-item"><button id="btn-config" class="nav-link" style="color: #f8d653; background-color:#101010; " >Configuracion</button></li>
+              <nav class="configuracion" id="menu-config">
+                <li class="nav-item"><a href="/grafica" class="nav-link active" aria-current="page" style="color: #f8d653;  background-color: rgb(29, 28, 28)" >Grafica</a></li>
+                <li class="nav-item"><a href="/productos" class="nav-link" style="color: #f8d653; ; background-color: rgb(29, 28, 28); background-color:#101010;" >Productos</a></li>
+                <li class="nav-item"><a href="/menuFAKE" class="nav-link active" aria-current="page" style="color: #f8d653;  z-index: 10; background-color: rgb(29, 28, 28)" >Vista del menu</a></li>
+              </nav>
+          </ul>
+        </header>
+      </div>
+      
+
+      <div class="b-example-divider"></div>
+      
+      <script>
+        const btnConfig = document.getElementById('btn-config');
+        const menuConfig = document.getElementById('menu-config');
+    
+        btnConfig.addEventListener('click', () => {
+          if (menuConfig.style.display === 'block') {
+            menuConfig.style.display = 'none';
+          } else {
+            menuConfig.style.display = 'block';
+          }
+        });
+      </script>
+</body>
+</html>

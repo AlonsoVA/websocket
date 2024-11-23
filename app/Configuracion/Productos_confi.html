@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="icon" href="Img-prodcut.png" type="image/png">
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/Prodcutodise.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="productos.css">
     <title>Productos</title>
 </head>
+
 <body>
+
     <datalist id="categorias">
         <option value="Bebidas"></option>
         <option value="Platillos"></option>
@@ -18,7 +21,9 @@
         <div id="navbar-configuracion" class="navbar-configuracion"></div>
     </header>
 
-    <div class="Datos">
+    <button id="create_product">Crear nuevo producto para el menu</button>
+<div class="contenedor">
+    <div class="Datos" id="datos">
         <h1> Nombre del producto: </h1>
         <input id="nombre-producto" type="text" placeholder="Agregue un nombre a su producto">
         <h1> Categoria del producto: </h1>
@@ -29,10 +34,9 @@
         <textarea id="descripcion_producto" name="textos"  placeholder="Escribe el texto del producto" required></textarea>
         <h1> Precio del producto: </h1>
         <input id="precio_producto" type="number" placeholder="Coloque el precio de su producto">
-        <h1> Cantidad del producto: </h1>
-        <input id="cantidad_producto" type="number" placeholder="Coloque el stock de su producto">
         <button id="agreg_pro" class="Boton_submit">Agregar Producto</button>
     </div>
+</div>
 
     <div class="productos-ya-creados" id="productos-ya-creados">
     <div id="Bebidas" class="Drinks"></div>
@@ -42,65 +46,39 @@
     <div id="Postres" class="Desserts"></div>
 
     <div id="Entradas" class="Tickets"></div>
-    </div>
+
+    
+</div> 
+<div id="navbar-footer"></div>
     
 </body>
 
 <script>
-
-document.getElementById("agreg_pro").addEventListener('click', async () => {
-    const nombre = document.getElementById("nombre-producto").value;
-    const categoria = document.getElementById("categoria_producto").value;
-    const descripcion = document.getElementById("descripcion_producto").value;
-    const precio = parseFloat(document.getElementById("precio_producto").value);
-    const stock = parseInt(document.getElementById("cantidad_producto").value);
-    const imgFile = document.getElementById("img-agreg").value;
-
-    try {
-        const response = await fetch('http://localhost:3500/AgregarProductos', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ nombre, categoria, precio, stock, descripcion, imgFile })
-        });
-
-        const responseData = await response.json();
-        console.log('Mensaje del servidor:', responseData.message || 'Sin mensaje de error');
-
-        console.log('Estado de respuesta:', response.status);
-        console.log('Respuesta completa:', response);
-
-        if (response.ok) {
-            alert('Producto agregado exitosamente');
-        } else {
-            alert('Problemas al agregar el producto');
-        }
-    } catch (e) {
-        alert('Se agrego el producto correctamente');
-    }
-});
-
-    fetch('/NavbarConfiguracion')
+    fetch('/header')
            .then(response => response.text())
            .then(data => {
                // Insertar el HTML en el contenedor
                document.getElementById('navbar-configuracion').innerHTML = data;
-               document.getElementById("titulo").innerHTML = "Agregar Productos";
 
-               // Crear un script para ejecutar el contenido JS de Producto.js
-               const script = document.createElement('script');
-               script.src = '/Producto.js';  // Ruta del script
-               script.onload = () => {
-                   console.log('El script se cargó y ejecutó correctamente');
-               };
-               document.body.appendChild(script);
+                const scripts = document.getElementById('navbar-configuracion').querySelectorAll('script');
+
+                scripts.forEach(script => {
+                const newScript = document.createElement('script');
+                newScript.textContent = script.textContent; 
+                document.body.appendChild(newScript); 
+                script.remove(); 
+             });
            })
            .catch(error => console.error('Error al cargar el navbar:', error));
 
+    fetch('/Footer')
+    .then(response => response.text())
+    .then(data => {
+    document.getElementById('navbar-footer').innerHTML = data;
+    })
+    .catch(error => console.error('Error al cargar el navbar:', error));
+
 </script>
+<script src="producto.js"></script>
 <script src="https://kit.fontawesome.com/dc58fd35be.js" crossorigin="anonymous"></script>
-<footer>
-    ©Todos los derechos reservados
-</footer>
 </html>

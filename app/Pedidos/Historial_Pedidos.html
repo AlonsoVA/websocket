@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="icon" href="Img-prodcut.png" type="image/png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QRService</title>
@@ -13,22 +14,41 @@
         <div id="navbar-configuracion" class="navbar-configuracion"></div>
     </header>
 
-    <div class="titulo">
-        <h2> Historial Pedidos Completados</h2>
-    </div>
+    <button class="deleteButton" id="deleteButton">Eliminar las ordenes</button> 
+    <div id="total"></div>
 
-    <div id="finishedOrders"></div>
+    <div id="finishedOrders"></div> 
+
+    <div id="navbar-footer"></div>
 
 </body>
+<script src="/HistoryOrder2.js"></script>
 <script>
-    fetch('/NavbarConfiguracion')
+  
+
+    fetch('/header')
            .then(response => response.text())
            .then(data => {
                // Insertar el HTML en el contenedor
                document.getElementById('navbar-configuracion').innerHTML = data;
-               document.getElementById("titulo").innerHTML = "Historial Pedidos Completados";
+
+                const scripts = document.getElementById('navbar-configuracion').querySelectorAll('script');
+
+                scripts.forEach(script => {
+                const newScript = document.createElement('script');
+                newScript.textContent = script.textContent; 
+                document.body.appendChild(newScript); 
+                script.remove(); 
+             });
            })
            .catch(error => console.error('Error al cargar el navbar:', error));
+
+    fetch('/Footer')
+    .then(response => response.text())
+    .then(data => {
+    document.getElementById('navbar-footer').innerHTML = data;
+    })
+    .catch(error => console.error('Error al cargar el navbar:', error));
 
            
    </script>

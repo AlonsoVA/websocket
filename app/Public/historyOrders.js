@@ -11,6 +11,10 @@ fetch('/Historial_ordenes')
       name.textContent = OrdersEnd.nombre_orden;
       name.classList.add('nameOrder');
 
+      const nameM = document.createElement('H1');
+      nameM.textContent = OrdersEnd.MesaName;
+      nameM.classList.add('nameOrder');
+
       const fecha = document.createElement('p');
       fecha.textContent = OrdersEnd.fecha_orden;
       fecha.classList.add('dateOrderFinished');
@@ -19,9 +23,14 @@ fetch('/Historial_ordenes')
       total.textContent = OrdersEnd.total;
       total.classList.add('priceOrder');
 
+      const orderComent = document.createElement('p');
+      orderComent.textContent = `Comentario: ${OrdersEnd.coment}`;
+    
+      div.appendChild(nameM);
       div.appendChild(name);
       div.appendChild(fecha);
       div.appendChild(total);
+      div.appendChild(orderComent);
 
       // Realizar la segunda llamada para obtener los detalles de cada orden específica
       fetch(`http://localhost:3500/Detalles/${OrdersEnd.id_orden}`, {
@@ -65,3 +74,5 @@ fetch('/Historial_ordenes')
   .catch(error => {
     console.error('Error al cargar las órdenes:', error);
   });
+
+

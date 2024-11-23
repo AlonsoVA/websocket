@@ -44,24 +44,22 @@ socket.onerror = (error) => {
 };
 
 // Función para mostrar el menú de notificaciones
-abrirNotis.addEventListener('click', function () {
-    notificaciones.style.display = 'block';
+abrirNotis.addEventListener('click', function() {
+notificaciones.style.display = 'block';
 });
 
 // Función para ocultar el menú de notificaciones
-cerrarNotis.addEventListener('click', function () {
-    notificaciones.style.display = 'none';
+cerrarNotis.addEventListener('click', function() {
+notificaciones.style.display = 'none';
 });
 
 // Cerrar el menú cuando se hace clic fuera de él
-document.addEventListener('click', function (event) {
-    if (
-        notificaciones.style.display === 'block' &&
-        !notificaciones.contains(event.target) &&
-        event.target !== abrirNotis
-    ) {
-        notificaciones.style.display = 'none';
-    }
+document.addEventListener('click', function(event) {
+if (notificaciones.style.display === 'block' && 
+    !notificaciones.contains(event.target) && 
+    event.target !== abrirNotis) {
+    notificaciones.style.display = 'none';
+}
 });
 
 // Manejo del clic en "Llamar mesero"
@@ -230,6 +228,7 @@ sumProducts.forEach((sumProducts, index) => {
             
             const cellName = document.createElement("td");
             const cellPrice = document.createElement("td");
+            const cellAmount = document.createElement("td");
             const cellRemove = document.createElement("td");
 
             
@@ -241,8 +240,13 @@ sumProducts.forEach((sumProducts, index) => {
             
             const parrafoPrice = document.createElement("p");
             parrafoPrice.className = "price";
-            parrafoPrice.textContent = ` $${precio.toFixed(2)} x ${cantidad}`;
+            parrafoPrice.textContent = ` $${precio.toFixed(2)} X `;
             cellPrice.appendChild(parrafoPrice);
+
+            const parrafoAmount = document.createElement("p");
+            parrafoAmount.className = "amount";
+            parrafoAmount.textContent = cantidad ;
+            cellAmount.appendChild(parrafoAmount);
 
             
             const removeButton = document.createElement("button");
@@ -272,13 +276,14 @@ sumProducts.forEach((sumProducts, index) => {
             
             row.appendChild(cellName);
             row.appendChild(cellPrice);
+            row.appendChild(cellAmount);
             row.appendChild(cellRemove);
 
             
             productOrde.appendChild(row);
             
             totalSum += precio * cantidad;
-            TOTAL.textContent = totalSum.toFixed(2) + "$";
+            TOTAL.textContent = "$" +totalSum.toFixed(2) ;
 
         }  else {
             alert('Añada una cantidad')
@@ -287,52 +292,52 @@ sumProducts.forEach((sumProducts, index) => {
 });
 
 /////////////////////////// Cambios boton enviar (Modificado por chris) ////////////////////////////////////////
-document.addEventListener("DOMContentLoaded", () => {
-    const botonEn = document.getElementById("enviar-t");
-    if (botonEn) {
-        botonEn.addEventListener("click", () => {
-            const productosGuardador = []; 
-            const productosName = document.querySelectorAll(".name");
-            const productosPrice = document.querySelectorAll(".price");
-            productosName.forEach((nameElement, index) => {
-                const name = nameElement.textContent;
-                const price = parseFloat(productosPrice[index].textContent.replace("$", "").trim()); 
-                productosGuardador.push({
-                    name: name,
-                    price: price
-                });
-            });
-            const mesa = 1; /* Mas adelante tenemos que crear aqui la funcion para que ese numero 1 cambie al numero de
-         la mesa que realizo la orden */
-         const comanda = {
-            mesa: mesa,
-            pedido: productosGuardador,
-            total: totalSum
-        };
+// document.addEventListener("DOMContentLoaded", () => {
+//     const botonEn = document.getElementById("enviar-t");
+//     if (botonEn) {
+//         botonEn.addEventListener("click", () => {
+//             const productosGuardador = []; 
+//             const productosName = document.querySelectorAll(".name");
+//             const productosPrice = document.querySelectorAll(".price");
+//             productosName.forEach((nameElement, index) => {
+//                 const name = nameElement.textContent;
+//                 const price = parseFloat(productosPrice[index].textContent.replace("$", "").trim()); 
+//                 productosGuardador.push({
+//                     name: name,
+//                     price: price
+//                 });
+//             });
+//             const mesa = 1; /* Mas adelante tenemos que crear aqui la funcion para que ese numero 1 cambie al numero de
+//          la mesa que realizo la orden */
+//          const comanda = {
+//             mesa: mesa,
+//             pedido: productosGuardador,
+//             total: totalSum
+//         };
 
-        //ENVIAR LA COMANDA AL SERVIDOR
-        fetch('http://localhost:3500/api/comandas', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(comanda)
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log("Comanda guardada:", data);
-             // Limpiar el carrito y restablecer el total
-             productOrde.innerHTML = ""; // Limpia el contenido del carrito
-             totalSum = 0; // Restablece el total a cero
-             TOTAL.textContent = totalSum.toFixed(2) + "$"; // Actualiza la visualización del total
-             alert("¡Comanda enviada exitosamente! Puedes seguir agregando productos.");
-        })
-        .catch(error => {
-            console.error("Error al guardar la comanda:", error);
-        });
-    });
-}
-});
+//         //ENVIAR LA COMANDA AL SERVIDOR
+//         fetch('http://localhost:3500/api/comandas', {
+//             method: 'POST',
+//             headers: {
+//                 'Content-Type': 'application/json'
+//             },
+//             body: JSON.stringify(comanda)
+//         })
+//         .then(response => response.json())
+//         .then(data => {
+//             console.log("Comanda guardada:", data);
+//              // Limpiar el carrito y restablecer el total
+//              productOrde.innerHTML = ""; // Limpia el contenido del carrito
+//              totalSum = 0; // Restablece el total a cero
+//              TOTAL.textContent = totalSum.toFixed(2) + "$"; // Actualiza la visualización del total
+//              alert("¡Comanda enviada exitosamente! Puedes seguir agregando productos.");
+//         })
+//         .catch(error => {
+//             console.error("Error al guardar la comanda:", error);
+//         });
+//     });
+// }
+// });
 
 
 ////////////////// Terminan cambios de christian /////////////////////////////
@@ -454,9 +459,65 @@ carritoCerrar.addEventListener('click', (event) => {
 });
 
 
-const ValueComent = document.getElementById('ComentEnviar')
 
-ValueComent.addEventListener('click', () => {
-    const inputText = document.getElementById('coment').value; 
-    console.log(inputText); 
+
+const botonEn = document.getElementById('enviar-t');
+const coment = document.getElementById('coment');
+const totalisimo = document.getElementById('TOTAL');
+const Nm = document.getElementById('Mesa');
+
+botonEn.addEventListener("click", async () => {   
+    function parseTotal() {
+        const totalText = totalisimo.textContent.trim();
+        const totalValue = parseFloat(totalText.replace('$', '').trim());
+        return totalValue;
+    }
+    const total = parseTotal();
+    const comentario = coment.value;
+    const NombreMesa = Nm.textContent;
+
+    console.log(NombreMesa);
+    
+
+    const pedidos = []; 
+    const productName = document.querySelectorAll('.name')
+    const productAmount = document.querySelectorAll('.amount')
+    const productPrice = document.querySelectorAll('.price')
+    productName.forEach((nameElement, index) => {
+            const name = nameElement.textContent;
+            const amount = parseInt(productAmount[index].textContent)
+            const price = parseFloat(productPrice[index].textContent.replace("$", "").trim()); 
+            pedidos.push({
+                    nombre_producto: name,
+                    cantidad: amount,
+                    precio: price
+            });
+        });
+
+    try {
+        const response = await fetch('http://localhost:3500/OrdenP', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({NombreMesa,pedidos,comentario,total})
+        });
+  
+        const responseData = await response.json();
+        console.log('Mensaje del servidor:', responseData.message || 'Sin mensaje de error');
+  
+        console.log('Estado de respuesta:', response.status);
+        console.log('Respuesta completa:', response);
+  
+        if (response.ok) {
+            alert('orden exitosa');
+        } else {
+            alert('Problemas al agregar el producto');
+        }
+    } catch (e) {
+        alert('orden agregada exitosamente');
+    }
+
+
+    
 });

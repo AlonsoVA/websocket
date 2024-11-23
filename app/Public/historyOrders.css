@@ -7,7 +7,7 @@
   }
   
   .OrderClass {
-    border: 2px solid #4CAF50;
+    border: 2px solid #f8d653;
     border-radius: 10px;
     padding: 20px;
     background-color: #f9f9f9;
@@ -29,7 +29,7 @@
   
   .priceOrder {
     font-size: 1.2em;
-    color: #4CAF50;
+    color: #f8d653;
     font-weight: bold;
     margin-bottom: 15px;
   }
@@ -59,6 +59,56 @@
   
   .productoDetalle p:nth-child(3) {
     font-size: 1em;
-    color: #4CAF50;
+    color: #f8d653;
     font-weight: bold;
   }
+
+.deleteButton {
+    background-color:  rgb(32, 31, 31); 
+    color: white;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.deleteButton:hover {
+    background-color:  rgb(65, 63, 63); 
+    transform: translateY(-2px); 
+}
+
+.deleteButton:active {
+    transform: translateY(1px); 
+}
+
+#total {
+  position: absolute;
+  top: 160px;
+  right: 10px; 
+  background-color: #ffffff; 
+  padding: 8px 15px; 
+  border-radius: 8px; 
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column; 
+  gap: 4px; 
+  z-index: 1000; 
+}
+
+.totalP {
+  font-size: 14px; 
+  color: #444; 
+  font-weight: normal; 
+  text-align: center; 
+  margin: 0;
+  background-color: #f4f4f4; 
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: background-color 0.3s ease; 
+}
+
+
+.totalP:hover {
+  background-color: #e5e5e5; 
+}
